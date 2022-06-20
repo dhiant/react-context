@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# React Context
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Context provides a way to pass data through the component tree without having to pass props down manually at every level.It solves the problem of props drilling.The React context provides data to components no matter how deep they are in the components tree.
 
-## Available Scripts
+<h5>Context provides a way to pass data through the component tree without having to pass props down manually at every level
+</h5>
 
-In the project directory, you can run:
+Creating a context involves 3 steps:
 
-### `npm start`
+<ol> 
+<li> Creating a context </li>
+<li> Providing a context </li>
+<li> Consuming a context </li> 
+</ol>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Creating a context
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The built-in function createContext(default) creates a context instance:
 
-### `npm test`
+import { createContext } from 'react';
+const ColorContext = createContext('Default Value');
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The factory function accepts one optional argument: the default value.
 
-### `npm run build`
+### Providing a context
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Context.Provider component available on the context instance is used to provide the context to its child components, no matter how deep they are.
+First we import context and use it to create our provider.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+import ColorContext from './ColorContext';
+function App() {
+const color= "white";
+return (
+<ColorContext.Provider value = {color}>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div className="App">
+<header className="App-header">
+<img src={logo} className="App-logo" alt="logo" />
+<h1 className="App-title">Use of React Context</h1>
+</header>
+</div>
+</ColorContext.Provider>
+);
+}
 
-### `npm run eject`
+### Consuming a context
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Consuming the context can be performed in 2 ways.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The first way, the one I recommend, is to use the useContext(Context) React hook:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+import { useContext } from 'react';
+function MyComponent() {
+const value = useContext(ColorContext);
+return <span>{value}</span>;
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The hook returns the value of the context: value = useContext(ColorContext). The hook also makes sure to re-render the component when the context value changes.
 
-## Learn More
+The second way is by using a render function supplied as a child to Context.Consumer special component available on the context instance:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function MyComponent() {
+return (
+<ColorContext.Consumer>
+{value => <span>{value}</span>}
+</ColorContext.Consumer>
+);
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## When to use context
 
-### Code Splitting
+The main idea of using the context is to allow your components to access some global data and re-render when that global data is changed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+You can hold inside the context:
 
-### Analyzing the Bundle Size
+<ul> 
+<li>global state</li> 
+<li> theme </li>
+<li>application configuration </li>
+<li> authenticated user name </li>
+<li> user settings </li>
+ <ul>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+On the other side, you should think carefully before deciding to use context in your application.
 
-### Making a Progressive Web App
+First, integrating the context adds complexity. Creating the context, wrapping everything in the provider, using the useContext() in every consumer — this increases complexity.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Secondly, adding context makes it more difficult to unit test the components. During unit testing, you would have to wrap the consumer components into a context provider. Including the components that are indirectly affected by the context — the ancestors of context consumers!
