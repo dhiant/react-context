@@ -17,8 +17,9 @@ Creating a context involves 3 steps:
 
 The built-in function createContext(default) creates a context instance:
 
-import { createContext } from 'react';
-const ColorContext = createContext('Default Value');
+~~~ import { createContext } from 'react';
+const ColorContext = createContext('Default Value'); 
+~~~
 
 The factory function accepts one optional argument: the default value.
 
@@ -27,7 +28,7 @@ The factory function accepts one optional argument: the default value.
 Context.Provider component available on the context instance is used to provide the context to its child components, no matter how deep they are.
 First we import context and use it to create our provider.
 
-import ColorContext from './ColorContext';
+~~~import ColorContext from './ColorContext';
 function App() {
 const color= "white";
 return (
@@ -35,30 +36,29 @@ return (
 
 <div className="App">
 <header className="App-header">
-<img src={logo} className="App-logo" alt="logo" />
 <h1 className="App-title">Use of React Context</h1>
 </header>
 </div>
 </ColorContext.Provider>
 );
 }
-
+~~~
 ### Consuming a context
 
 Consuming the context can be performed in 2 ways.
 
 The first way, the one I recommend, is to use the useContext(Context) React hook:
 
-import { useContext } from 'react';
+~~~import { useContext } from 'react';
 function MyComponent() {
 const value = useContext(ColorContext);
 return <span>{value}</span>;
 }
-
+~~~
 The hook returns the value of the context: value = useContext(ColorContext). The hook also makes sure to re-render the component when the context value changes.
 
 The second way is by using a render function supplied as a child to Context.Consumer special component available on the context instance:
-
+~~~
 function MyComponent() {
 return (
 <ColorContext.Consumer>
@@ -66,7 +66,7 @@ return (
 </ColorContext.Consumer>
 );
 }
-
+~~~
 ## When to use context
 
 The main idea of using the context is to allow your components to access some global data and re-render when that global data is changed.
