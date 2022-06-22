@@ -1,21 +1,7 @@
 import "./App.css";
-import { GlobalProvider } from "./context/GlobalState";
-import Header from "./components/Header";
-import Balance from "./components/Balance";
-import IncomeExpenses from "./components/IncomeExpenses";
-import TransactionList from "./components/TransactionList";
-import AddTransaction from "./components/AddTransaction";
 
 function App() {
-  return (
-    <GlobalProvider>
-      <Header />
-      <Balance />
-      <IncomeExpenses />
-      <TransactionList />
-      <AddTransaction />
-    </GlobalProvider>
-  );
+  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
 }
 
 export default App;
