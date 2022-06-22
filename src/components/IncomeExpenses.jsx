@@ -7,6 +7,7 @@ const IncomeExpenses = () => {
   const amounts = transactions.map((transaction) => transaction.amount);
   //  caluculating income
   const incomes = amounts.filter((amount) => amount > 0);
+  console.log(incomes);
   const totalIncome = incomes.reduce((acc, curr) => acc + curr, 0).toFixed(2);
   //  caluculating expense
   const expenses = amounts.filter((amount) => amount < 0);
