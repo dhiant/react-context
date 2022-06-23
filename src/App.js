@@ -1,7 +1,15 @@
 import "./App.css";
+import EmployeeList from "./components/EmployeeList";
+import { GlobalProvider } from "./context/GlobalState";
 
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <GlobalProvider>
+      <div className="App">
+        <EmployeeList />
+      </div>
+    </GlobalProvider>
+  );
 }
 
 export default App;
