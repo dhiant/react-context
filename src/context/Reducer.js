@@ -9,7 +9,8 @@ export default function reducer(state, action) {
       const updatedEmployee = action.payload;
       const updatedEmployees = state.employees.map((employee) => {
         if (employee.id === updatedEmployee.id) {
-          return updatedEmployees;
+          // updated employee
+          return updatedEmployee;
         }
         return employee;
       });

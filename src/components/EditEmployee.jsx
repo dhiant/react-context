@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 
 const EditEmployee = (route) => {
   let navigate = useNavigate();
+  // catch the id from the url
+  let params = useParams();
+  // console.log(params);
+  const { editEmployee, employees } = useContext(GlobalContext);
+
   // data of selected employee to edit
   const [selectedEmployee, setSelectedEmployee] = useState({
     id: null,
@@ -11,16 +16,15 @@ const EditEmployee = (route) => {
     designation: "",
     location: "",
   });
-  const { editEmployee, employees } = useContext(GlobalContext);
 
   // comparing route parameter with parameter in the employee object from the state
-  const currentEmployeeId = route.match.params.id;
+  const currentEmployeeId = params.id;
   useEffect(() => {
     const employeeId = currentEmployeeId;
-    const selectedUser = employees.find(
+    const selectedEmployee = employees.find(
       (employee) => employee.id === parseInt(employeeId)
     );
-    setSelectedEmployee(selectedUser);
+    setSelectedEmployee(selectedEmployee);
   }, [currentEmployeeId, employees]);
 
   // function to update/edit employee details
@@ -54,6 +58,7 @@ const EditEmployee = (route) => {
               onChange={(e) => handleChange("name", e.target.value)}
               type="text"
               placeholder="Enter name"
+              required
             />
           </div>
           <div className="w-full mb-5">
@@ -69,6 +74,7 @@ const EditEmployee = (route) => {
               onChange={(e) => handleChange("location", e.target.value)}
               type="text"
               placeholder="Enter location"
+              required
             />
           </div>
           <div className="w-full mb-5">
@@ -84,6 +90,7 @@ const EditEmployee = (route) => {
               onChange={(e) => handleChange("designation", e.target.value)}
               type="text"
               placeholder="Enter designation"
+              required
             />
           </div>
           <div className="flex items-center justify-between">

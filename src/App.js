@@ -1,14 +1,19 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import EmployeeList from "./components/EmployeeList";
 import { GlobalProvider } from "./context/GlobalState";
+import Home from "./components/Home";
+import EditEmployee from "./components/EditEmployee";
 import AddEmployee from "./components/AddEmployee";
 
 function App() {
   return (
     <GlobalProvider>
       <div className="App">
-        <EmployeeList />
-        <AddEmployee />
+        <Routes>
+          <Route path="/" element={<Home />} exact />
+          <Route path="/add" element={<AddEmployee />} />
+          <Route path="/edit/:id" element={<EditEmployee />} />
+        </Routes>
       </div>
     </GlobalProvider>
   );
