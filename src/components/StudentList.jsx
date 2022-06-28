@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { StudentContext } from "../context/StudentContext";
 
 const StudentList = ({ editUser }) => {
-  const { students, deleteStudent, updateStudent, setCurrentStudent } =
+  const { students, deleteStudent, setCurrentStudentId } =
     useContext(StudentContext);
   return (
     <>
@@ -29,7 +29,7 @@ const StudentList = ({ editUser }) => {
                       className="bg-[#0366EE] px-2 py-1   rounded text-base font-semibold text-white"
                       onClick={() => {
                         editUser("UPDATE");
-                        setCurrentStudent(student.id);
+                        setCurrentStudentId(student.id);
                       }}
                     >
                       Update

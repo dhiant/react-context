@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditUser from "./EditUser";
-import Form from "./Form";
+import AddUser from "./AddUser";
 import StudentList from "./StudentList";
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <div className="lg:flex justify-around pt-20 mx-auto">
-        {!editingUser && <Form />}
+        {!editingUser && <AddUser />}
         {editingUser && <EditUser editUser={editUser} />}
         {/* Student List */}
         <StudentList editUser={editUser} />

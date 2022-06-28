@@ -14,19 +14,6 @@ export default function reducer(state, action) {
       };
     case "UPDATE":
       const selectedStudent = action.payload;
-      console.log({
-        students: state.students.map((student) =>
-          student.id === selectedStudent.id
-            ? {
-                ...selectedStudent,
-                name: selectedStudent.name,
-                email: selectedStudent.email,
-                roll: selectedStudent.roll,
-              }
-            : student
-        ),
-        currentStudent: null,
-      });
       return {
         students: state.students.map((student) =>
           student.id === selectedStudent.id
@@ -43,7 +30,7 @@ export default function reducer(state, action) {
     case "SELECT":
       return {
         ...state,
-        currentStudent: action.payload,
+        currentStudentId: action.payload,
       };
     default: {
       return state;

@@ -10,7 +10,7 @@ const initialState = {
       roll: 1,
     },
   ],
-  currentStudent: null,
+  currentStudentId: 1,
 };
 // creating context
 export const StudentContext = createContext(initialState);
@@ -37,7 +37,7 @@ export const StudentContextProvider = ({ children }) => {
       payload: student,
     });
   }
-  function setCurrentStudent(id) {
+  function setCurrentStudentId(id) {
     dispatch({
       type: "SELECT",
       payload: id,
@@ -47,11 +47,11 @@ export const StudentContextProvider = ({ children }) => {
     <StudentContext.Provider
       value={{
         students: state.students,
-        currentStudent: state.currentStudent,
+        currentStudentId: state.currentStudentId,
         addStudent,
         deleteStudent,
         updateStudent,
-        setCurrentStudent,
+        setCurrentStudentId,
       }}
     >
       {children}

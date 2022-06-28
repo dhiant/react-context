@@ -3,17 +3,15 @@ import { StudentContext } from "../context/StudentContext";
 
 const EditUser = ({ editUser }) => {
   // consuming context
-  const { students, currentStudent, updateStudent } =
+  const { students, currentStudentId, updateStudent } =
     useContext(StudentContext);
-
   const studentData = students.filter(
-    (student) => student.id === currentStudent
+    (student) => student.id === currentStudentId
   )[0];
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [roll, setRoll] = useState("");
-  console.log(name, email, roll);
 
   useEffect(() => {
     if (studentData) {
