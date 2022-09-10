@@ -7,7 +7,7 @@ const Form = () => {
   const [roll, setRoll] = useState("");
 
   // consuming context
-  const { addStudent, students } = useContext(StudentContext);
+  const { addStudent } = useContext(StudentContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
