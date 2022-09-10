@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <div className="container mx-auto">
-        <h3 className="text-center text-emerald-600 text-3xl mt-20  leading-8 text-black font-bold tracking-wide uppercase">
+        <h3 className="text-center text-emerald-600 text-3xl mt-20 leading-8 font-bold tracking-wide uppercase">
           StaffBook
         </h3>
         <Heading />
